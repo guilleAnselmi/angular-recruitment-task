@@ -47,4 +47,4 @@ We advise to use Angular Material as UI library to minimize effort in layout sty
 
 API with data should be run locally using json-server https://www.npmjs.com/package/json-server
 
-Please fork the project to you own bitbucket, github, or other git hosting account, and give us access to the repository holding your solution.
+Please fork the project to your own bitbucket, github, or other git hosting account, and give us access to the repository holding your solution.
