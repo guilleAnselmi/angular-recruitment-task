@@ -42,6 +42,8 @@ What we pay attention to:
 
 * API usage - calls should be limited to minimum.
 
+* Using standalone architecture, avoiding ngModules
+
 
 We advise to use Angular Material as UI library to minimize effort in layout styling. It does not have to be pixel perfect, wireframe is just a suggestion.
 
