@@ -1,6 +1,6 @@
 <div class="payment-item">
   <div class="payment-item__name">
-    {{ payment.status }}
+    {{ payment.status | paymentStatus }}
   </div>
   <div class="payment-item__count">
     {{ payment.count }}
