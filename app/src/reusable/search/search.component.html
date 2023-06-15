@@ -1,10 +1,6 @@
 <div class="search">
   <label class="search__icon" for="search">
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -15,10 +11,12 @@
   </label>
   <input
     id="search"
-    (change)="onInput()"
+    class="search__input"
+    [ngClass]="{ 'search__input--dirty': !!searchValue }"
+    type="search"
     [(ngModel)]="searchValue"
     [placeholder]="placeholder"
-    type="text"
-    class="search__input"
+    (input)="onInput()"
+    (keydown)="onKeyDown($event)"
   />
 </div>

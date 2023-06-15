@@ -1,1 +1,15 @@
-<p>payments works!</p>
+<div class="payments">
+  <app-list
+    class="payments-list"
+    [placeholder]="placeholder"
+    [title]="title"
+    [items]="payments$ | async"
+    (search)="onSearch($event)"
+  >
+    <ng-template #listItem let-payment>
+      <app-list-item [checked]="payment?.checked">
+        <app-payment-item [payment]="payment"></app-payment-item>
+      </app-list-item>
+    </ng-template>
+  </app-list>
+</div>

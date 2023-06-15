@@ -17,9 +17,19 @@
     padding-left: 44px;
     color: #9880f8;
     font-size: 14px;
+    &--dirty {
+      background-color: white;
+      border-radius: 50px;
+      box-shadow: 0 0 2px 2px;
+    }
+
     &::placeholder {
       color: #9880f8;
       font-weight: normal;
+    }
+    &::-webkit-search-cancel-button {
+      position: relative;
+      right: 10px;
     }
   }
 

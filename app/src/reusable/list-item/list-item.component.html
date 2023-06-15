@@ -4,5 +4,7 @@
   class="list-item"
 >
   <input class="list-item__checkbox" [checked]="checked" type="checkbox" />
-  <ng-content> </ng-content>
+  <div class="list-item__content">
+    <ng-content> </ng-content>
+  </div>
 </div>

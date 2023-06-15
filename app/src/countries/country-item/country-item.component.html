@@ -1,0 +1,10 @@
+<div class="country-item">
+  <div class="country-item__flag">
+    <img loading="lazy" [src]="country.flag" alt="avatar" />
+  </div>
+  <div class="country-item__name">{{ country.name }}</div>
+  <div class="country-item__code">- {{ country.code }}</div>
+  <div class="country-item__count">
+    {{ country.someWeirdServerFieldNameWithCount }}
+  </div>
+</div>

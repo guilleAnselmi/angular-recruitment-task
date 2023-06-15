@@ -1,0 +1,11 @@
+<div class="user-item">
+  <div class="user-item__info">
+    <div class="user-item__name">{{ user.firstName }} {{ user.lastName }}</div>
+    <div class="user-item__email">
+      {{ user.email }}
+    </div>
+  </div>
+  <div class="user-item__avatar">
+    <img loading="lazy" [src]="user.avatarUrl" alt="avatar" />
+  </div>
+</div>

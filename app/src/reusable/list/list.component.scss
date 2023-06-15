@@ -3,6 +3,7 @@
   flex-direction: column;
   box-shadow: 0 0 3px 2px #4e4e4e;
   border-radius: 4px;
+  min-height: 600px;
   &__header {
     padding: 15px;
     margin-bottom: 20px;
@@ -19,9 +20,31 @@
     max-height: 400px;
     overflow: auto;
     // TODO
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__footer {
+    padding: 15px;
     min-height: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9880f8;
+    padding: 10px 20px;
+    height: 40px;
+    width: 150px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
   }
 }

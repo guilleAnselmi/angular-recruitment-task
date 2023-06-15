@@ -1,19 +1,15 @@
 <div class="users">
   <app-list
     class="users-list"
-    [labelValue]="usersLabel"
     [placeholder]="usersPlaceholder"
     [title]="usersTitle"
     [items]="users$ | async"
+    (search)="onSearch($event)"
   >
     <ng-template #listItem let-user>
       <app-list-item [checked]="user?.checked">
-        <div>{{ user.firstName }} {{ user.lastName }}</div>
+        <app-user-item [user]="user"></app-user-item>
       </app-list-item>
     </ng-template>
-
-    <!-- <ng-template #listFooter>
-      <button>Continuar</button>
-    </ng-template> -->
   </app-list>
 </div>

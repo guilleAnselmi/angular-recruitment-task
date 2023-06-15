@@ -8,7 +8,17 @@
     ></ng-container>
     <ng-template #defaultListHeader>
       <div class="reusable-list__title">{{ title }}</div>
+    </ng-template>
+    <ng-container
+      *ngTemplateOutlet="
+        searchBar || defaultSearch;
+        context: { $implicit: items }
+      "
+    ></ng-container>
+
+    <ng-template #defaultSearch>
       <app-search
+        *ngIf="filterable"
         class="reusable-list__search"
         [placeholder]="placeholder"
         (search)="onSearch($event)"
@@ -32,7 +42,10 @@
         context: { $implicit: items }
       "
     ></ng-container>
-    <ng-template #defaultListFooter> </ng-template>
+    <ng-template #defaultListFooter>
+      <!-- TODO maybe create a reusable button -->
+      <button class="reusable-list__button">Continue</button>
+    </ng-template>
   </div>
 </div>
 

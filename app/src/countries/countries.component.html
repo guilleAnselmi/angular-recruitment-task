@@ -1,1 +1,14 @@
-<app-list></app-list>
+<div class="countries">
+  <app-list
+    class="countries-list"
+    [placeholder]="placeholder"
+    [title]="title"
+    [items]="countries$ | async"
+  >
+    <ng-template #listItem let-country>
+      <app-list-item [checked]="country?.checked">
+        <app-country-item [country]="country"></app-country-item>
+      </app-list-item>
+    </ng-template>
+  </app-list>
+</div>

@@ -1,0 +1,31 @@
+.country-item {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  gap: 10px;
+
+  &__flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 30px;
+      width: 30px;
+      object-fit: cover;
+    }
+  }
+
+  &__name {
+    font-size: 16px;
+  }
+
+  &__code {
+    color: #859094;
+  }
+
+  &__count {
+    margin-left: auto;
+    color: #9880f8;
+    font-weight: 500;
+  }
+}
