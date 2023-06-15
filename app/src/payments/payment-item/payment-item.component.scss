@@ -1,0 +1,14 @@
+.payment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__name {
+    font-size: 16px;
+  }
+  &__count {
+    margin-left: auto;
+    color: #9880f8;
+    font-weight: 500;
+  }
+}

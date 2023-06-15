@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Payment } from '../models/payment.type';
+import { PaymentByStatus } from '../models/payment.type';
 
 @Component({
   selector: 'app-payment-item',
@@ -11,5 +11,5 @@ import { Payment } from '../models/payment.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentItemComponent {
-  @Input() payment!: Payment;
+  @Input() payment!: PaymentByStatus;
 }
