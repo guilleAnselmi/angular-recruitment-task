@@ -4,6 +4,7 @@
     [placeholder]="placeholder"
     [title]="title"
     [items]="countries$ | async"
+    (search)="onSearch($event)"
   >
     <ng-template #listItem let-country>
       <app-list-item [checked]="country?.checked">
