@@ -1,0 +1,8 @@
+<div
+  (click)="checked = !checked; $event.stopPropagation()"
+  [ngClass]="{ 'list-item--checked': checked }"
+  class="list-item"
+>
+  <input class="list-item__checkbox" [checked]="checked" type="checkbox" />
+  <ng-content> </ng-content>
+</div>

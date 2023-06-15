@@ -1,0 +1,17 @@
+.list-item {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  font-size: 16px;
+  gap: 10px;
+  height: 60px;
+  padding: 0 15px;
+  &--checked {
+    background-color: #8d76e9b3;
+    font-weight: bold;
+  }
+
+  &__checkbox {
+    width: 20px;
+  }
+}

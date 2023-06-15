@@ -1,1 +1,19 @@
-<p>users works!</p>
+<div class="users">
+  <app-list
+    class="users-list"
+    [labelValue]="usersLabel"
+    [placeholder]="usersPlaceholder"
+    [title]="usersTitle"
+    [items]="users$ | async"
+  >
+    <ng-template #listItem let-user>
+      <app-list-item [checked]="user?.checked">
+        <div>{{ user.firstName }} {{ user.lastName }}</div>
+      </app-list-item>
+    </ng-template>
+
+    <!-- <ng-template #listFooter>
+      <button>Continuar</button>
+    </ng-template> -->
+  </app-list>
+</div>

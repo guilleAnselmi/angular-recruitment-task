@@ -1,0 +1,27 @@
+.reusable-list {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 3px 2px #4e4e4e;
+  border-radius: 4px;
+  &__header {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    color: #9880f8;
+    margin-bottom: 20px;
+  }
+
+  &__content {
+    max-height: 400px;
+    overflow: auto;
+    // TODO
+  }
+
+  &__footer {
+    min-height: 20px;
+  }
+}

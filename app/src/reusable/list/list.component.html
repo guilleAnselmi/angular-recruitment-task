@@ -1,0 +1,43 @@
+<div class="reusable-list">
+  <div class="reusable-list__header">
+    <ng-container
+      *ngTemplateOutlet="
+        header || defaultListHeader;
+        context: { $implicit: items }
+      "
+    ></ng-container>
+    <ng-template #defaultListHeader>
+      <div class="reusable-list__title">{{ title }}</div>
+      <app-search
+        class="reusable-list__search"
+        [placeholder]="placeholder"
+        (search)="onSearch($event)"
+      ></app-search>
+    </ng-template>
+  </div>
+  <div class="reusable-list__content">
+    <div class="reussable-list__item" *ngFor="let item of items">
+      <ng-container
+        *ngTemplateOutlet="
+          listItem || defaultListItemTemplate;
+          context: { $implicit: item }
+        "
+      ></ng-container>
+    </div>
+  </div>
+  <div class="reusable-list__footer">
+    <ng-container
+      *ngTemplateOutlet="
+        footer || defaultListFooter;
+        context: { $implicit: items }
+      "
+    ></ng-container>
+    <ng-template #defaultListFooter> </ng-template>
+  </div>
+</div>
+
+<ng-template #defaultListItemTemplate let-item>
+  <app-list-item>
+    {{ item[labelValue] }}
+  </app-list-item>
+</ng-template>
