@@ -7,7 +7,7 @@ import { ApiService } from 'src/api.service';
   providedIn: 'root',
 })
 export class CountriesService {
-  countriesSubject$: BehaviorSubject<Country[]> = new BehaviorSubject<
+  private countriesSubject$: BehaviorSubject<Country[]> = new BehaviorSubject<
     Country[]
   >([]);
   countries$ = this.countriesSubject$.asObservable();
@@ -25,17 +25,25 @@ export class CountriesService {
 
   public getCountriesFiltered(): Observable<Country[]> {
     return this.countries$.pipe(
-      map((users) => this.filterUsers(users, this.searchTerm))
+      map((countries) => this.filterCountries(countries, this.searchTerm))
     );
   }
 
-  private filterUsers(users: Country[], term = '') {
+  private filterCountries(countries: Country[], term = '') {
     const normalizedTerm = term.toString().replace(/\s/g, '').toLowerCase();
 
-    return users.filter((Country) =>
+    return countries.filter((Country) =>
       `${Country.code}${Country.name}${Country.someWeirdServerFieldNameWithCount}${Country.id}`
         .toLocaleLowerCase()
         .includes(normalizedTerm)
+    );
+  }
+
+  public getById(id: string): Observable<Country | undefined> {
+    return this.countries$.pipe(
+      map((countries: Country[]) =>
+        countries.find((country) => country.id === id)
+      )
     );
   }
 

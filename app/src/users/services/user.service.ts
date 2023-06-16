@@ -6,7 +6,9 @@ import { BehaviorSubject, Observable, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  private usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
+    []
+  );
   users$ = this.usersSubject$.asObservable();
   private searchTerm = '';
 
@@ -33,6 +35,12 @@ export class UserService {
       `${user.firstName}${user.lastName}${user.email}${user.id}`
         .toLocaleLowerCase()
         .includes(normalizedTerm)
+    );
+  }
+
+  public getById(id: string): Observable<User | undefined> {
+    return this.users$.pipe(
+      map((users: User[]) => users.find((user) => user.id === id))
     );
   }
 

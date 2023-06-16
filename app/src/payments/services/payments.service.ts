@@ -7,9 +7,8 @@ import { Payment, PaymentByStatus } from 'src/payments/models/payment.type';
   providedIn: 'root',
 })
 export class PaymentsService {
-  paymentsSubject$: BehaviorSubject<PaymentByStatus[]> = new BehaviorSubject<
-    PaymentByStatus[]
-  >([]);
+  private paymentsSubject$: BehaviorSubject<PaymentByStatus[]> =
+    new BehaviorSubject<PaymentByStatus[]>([]);
   payments$ = this.paymentsSubject$.asObservable();
   private searchTerm = '';
 
