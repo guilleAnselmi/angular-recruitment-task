@@ -28,14 +28,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() debounceTime = 250;
   @Input() searchValue = '';
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() inputSearch: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
     this.subscription.add(
       this.inputSubject$
         .pipe(debounceTime(this.debounceTime))
         .subscribe((val) => {
-          this.search.emit(val);
+          this.inputSearch.emit(val);
         })
     );
   }

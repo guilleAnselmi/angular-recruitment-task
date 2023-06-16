@@ -2,31 +2,39 @@
   <div class="reusable-list__header">
     <ng-container
       *ngTemplateOutlet="
-        header || defaultListHeader;
+        header || defaultListHeaderTemplate;
         context: { $implicit: items }
       "
     ></ng-container>
-    <ng-template #defaultListHeader>
+    <ng-template #defaultListHeaderTemplate>
       <div class="reusable-list__title">{{ title }}</div>
     </ng-template>
     <ng-container
       *ngTemplateOutlet="
-        searchBar || defaultSearch;
+        searchBar || defaultSearchTemplate;
         context: { $implicit: items }
       "
     ></ng-container>
 
-    <ng-template #defaultSearch>
+    <ng-template #defaultSearchTemplate>
       <app-search
         *ngIf="filterable"
         class="reusable-list__search"
         [placeholder]="placeholder"
-        (search)="onSearch($event)"
+        (inputSearch)="onSearch($event)"
       ></app-search>
     </ng-template>
   </div>
-  <div class="reusable-list__content">
-    <div class="reussable-list__item" *ngFor="let item of items">
+  <div *ngIf="isLoading" class="reusable-list__loading">
+    <ng-container
+      *ngTemplateOutlet="loadingTemplate || defaultLoadingTemplate"
+    ></ng-container>
+    <ng-template #defaultLoadingTemplate>
+      <div>Loading...</div>
+    </ng-template>
+  </div>
+  <div [hidden]="isLoading" class="reusable-list__content">
+    <div class="reussable-list__item" *ngFor="let item of items$ | async">
       <ng-container
         *ngTemplateOutlet="
           listItem || defaultListItemTemplate;
@@ -34,15 +42,26 @@
         "
       ></ng-container>
     </div>
+    <div
+      *ngIf="showNoItemsTemplate && !(items$ | async)?.length"
+      class="reusable-list__empty"
+    >
+      <ng-container
+        *ngTemplateOutlet="noItems || defaultNoItemsTemplate"
+      ></ng-container>
+      <ng-template #defaultNoItemsTemplate>
+        <div>{{ notFoundMessage }}</div>
+      </ng-template>
+    </div>
   </div>
   <div class="reusable-list__footer">
     <ng-container
       *ngTemplateOutlet="
-        footer || defaultListFooter;
+        footer || defaultListFooterTemplate;
         context: { $implicit: items }
       "
     ></ng-container>
-    <ng-template #defaultListFooter>
+    <ng-template #defaultListFooterTemplate>
       <!-- TODO maybe create a reusable button -->
       <button class="reusable-list__button">Continue</button>
     </ng-template>

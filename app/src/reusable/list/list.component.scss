@@ -24,6 +24,22 @@
     }
   }
 
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9880f8;
+    font-weight: bold;
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9880f8;
+    font-weight: bold;
+  }
+
   &__footer {
     margin-top: auto;
     padding: 15px;
