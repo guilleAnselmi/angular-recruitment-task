@@ -3,9 +3,9 @@
     class="countries-list"
     [placeholder]="placeholder"
     [title]="title"
+    [notFoundMessage]="notFoundMessage"
     [isLoading]="!!(isLoading$ | async)"
     [items]="countries$ | async"
-    (search)="onSearch($event)"
   >
     <ng-template #listItem let-country>
       <app-list-item [checked]="country?.checked">

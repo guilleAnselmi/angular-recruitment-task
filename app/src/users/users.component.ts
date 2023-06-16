@@ -5,6 +5,7 @@ import { ListItemComponent } from 'src/reusable/list-item/list-item.component';
 import { UserService } from './services/user.service';
 import { UserItemComponent } from './user-item/user-item.component';
 import { Observable } from 'rxjs';
+import { User } from './models/user.type';
 
 @Component({
   selector: 'app-users',
@@ -15,14 +16,10 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent {
-  userService = inject(UserService);
-  users$ = this.userService.getUsersFiltered();
+  userService: UserService = inject(UserService);
+  users$: Observable<User[]> = this.userService.users$;
   isLoading$: Observable<boolean> = this.userService.fetchingUsers$;
   usersTitle = 'Manage Users';
   usersPlaceholder = 'Search Users';
   noUsersMessage = 'No Users found...';
-
-  onSearch(searchTerm: string) {
-    this.userService.search(searchTerm);
-  }
 }

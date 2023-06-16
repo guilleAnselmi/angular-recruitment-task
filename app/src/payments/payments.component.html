@@ -3,9 +3,9 @@
     class="payments-list"
     [placeholder]="placeholder"
     [title]="title"
+    [notFoundMessage]="notFoundMessage"
     [isLoading]="!!(isLoading$ | async)"
     [items]="payments$ | async"
-    (search)="onSearch($event)"
   >
     <ng-template #listItem let-payment>
       <app-list-item [checked]="payment?.checked">

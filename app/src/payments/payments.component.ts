@@ -4,6 +4,8 @@ import { PaymentsService } from './services/payments.service';
 import { ListComponent } from 'src/reusable/list/list.component';
 import { ListItemComponent } from 'src/reusable/list-item/list-item.component';
 import { PaymentItemComponent } from './payment-item/payment-item.component';
+import { Observable } from 'rxjs';
+import { PaymentByStatus } from './models/payment.type';
 
 @Component({
   selector: 'app-payments',
@@ -19,13 +21,11 @@ import { PaymentItemComponent } from './payment-item/payment-item.component';
 })
 export class PaymentsComponent {
   paymentService = inject(PaymentsService);
-  payments$ = this.paymentService.getPaymentsFiltered();
-  isLoading$ = this.paymentService.fetchingPayments$;
+  payments$: Observable<PaymentByStatus[]> =
+    this.paymentService.getPaymentsByStatus();
+  isLoading$: Observable<boolean> = this.paymentService.fetchingPayments$;
 
   title = 'Manage Payments';
   placeholder = 'Search Payments';
-
-  onSearch(searchTerm: string) {
-    this.paymentService.search(searchTerm);
-  }
+  notFoundMessage = 'Not Payments found...';
 }
