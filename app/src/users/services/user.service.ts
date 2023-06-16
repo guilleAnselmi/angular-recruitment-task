@@ -23,7 +23,6 @@ export class UserService {
       .fetchUsers()
       .pipe(finalize(() => this.fetchingUsers$.next(false)))
       .subscribe((users) => {
-        this.fetchingUsers$.next(false);
         this.usersSubject$.next(users);
       });
   }

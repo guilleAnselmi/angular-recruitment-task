@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, finalize, map } from 'rxjs';
 import { Country } from '../models/country.type';
 import { ApiService } from 'src/api.service';
 
@@ -11,6 +11,8 @@ export class CountriesService {
     Country[]
   >([]);
   countries$ = this.countriesSubject$.asObservable();
+  fetchingCountries$ = new BehaviorSubject<boolean>(false);
+
   private searchTerm = '';
 
   constructor(private apiService: ApiService) {
@@ -18,9 +20,14 @@ export class CountriesService {
   }
 
   private fetchCountries(): void {
+    this.fetchingCountries$.next(true);
+
     this.apiService
       .fetchCountries()
-      .subscribe((countries) => this.countriesSubject$.next(countries));
+      .pipe(finalize(() => this.fetchingCountries$.next(false)))
+      .subscribe((countries) => {
+        this.countriesSubject$.next(countries);
+      });
   }
 
   public getCountriesFiltered(): Observable<Country[]> {

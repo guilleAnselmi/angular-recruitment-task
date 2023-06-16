@@ -19,15 +19,13 @@ import { CountriesService } from './services/countries.service';
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.scss'],
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent {
   countriesService = inject(CountriesService);
-  countries$: Observable<Country[]> = of([]);
+  countries$: Observable<Country[]> =
+    this.countriesService.getCountriesFiltered();
+  isLoading$ = this.countriesService.fetchingCountries$;
   title = 'Manage Countries';
   placeholder = 'Search Countries';
-
-  ngOnInit(): void {
-    this.countries$ = this.countriesService.getCountriesFiltered();
-  }
 
   onSearch(searchTerm: string) {
     this.countriesService.search(searchTerm);

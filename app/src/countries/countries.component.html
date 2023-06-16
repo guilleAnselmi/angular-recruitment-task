@@ -3,6 +3,7 @@
     class="countries-list"
     [placeholder]="placeholder"
     [title]="title"
+    [isLoading]="!!(isLoading$ | async)"
     [items]="countries$ | async"
     (search)="onSearch($event)"
   >

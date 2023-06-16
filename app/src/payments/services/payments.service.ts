@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, reduce } from 'rxjs';
+import { BehaviorSubject, Observable, finalize, map, reduce } from 'rxjs';
 import { ApiService } from 'src/api.service';
 import { Payment, PaymentByStatus } from 'src/payments/models/payment.type';
 
@@ -10,6 +10,8 @@ export class PaymentsService {
   private paymentsSubject$: BehaviorSubject<PaymentByStatus[]> =
     new BehaviorSubject<PaymentByStatus[]>([]);
   payments$ = this.paymentsSubject$.asObservable();
+  fetchingPayments$ = new BehaviorSubject<boolean>(false);
+
   private searchTerm = '';
 
   constructor(private apiService: ApiService) {
@@ -43,10 +45,16 @@ export class PaymentsService {
   }
 
   private fetchPayments(): void {
+    this.fetchingPayments$.next(true);
     this.apiService
       .fetchPayments()
-      .pipe(this.groupPaymentsByStatus)
-      .subscribe((payments) => this.paymentsSubject$.next(payments));
+      .pipe(
+        this.groupPaymentsByStatus,
+        finalize(() => this.fetchingPayments$.next(false))
+      )
+      .subscribe((payments) => {
+        this.paymentsSubject$.next(payments);
+      });
   }
 
   public getPaymentsFiltered(): Observable<PaymentByStatus[]> {
