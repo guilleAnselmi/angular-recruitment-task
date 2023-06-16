@@ -2,9 +2,10 @@
   <app-list
     class="users-list"
     [placeholder]="usersPlaceholder"
+    [isLoading]="!!(isLoading$ | async)"
     [title]="usersTitle"
-    [items]="users$ | async"
-    (search)="onSearch($event)"
+    [notFoundMessage]="noUsersMessage"
+    [items]="users$"
   >
     <ng-template #listItem let-user>
       <app-list-item [checked]="user?.checked">

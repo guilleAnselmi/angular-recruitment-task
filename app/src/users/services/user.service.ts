@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/api.service';
 import { User } from 'src/users/models/user.type';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, finalize, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,6 +10,7 @@ export class UserService {
     []
   );
   users$ = this.usersSubject$.asObservable();
+  fetchingUsers$ = new BehaviorSubject<boolean>(false);
   private searchTerm = '';
 
   constructor(private apiService: ApiService) {
@@ -17,9 +18,14 @@ export class UserService {
   }
 
   private fetchUsers(): void {
+    this.fetchingUsers$.next(true);
     this.apiService
       .fetchUsers()
-      .subscribe((users) => this.usersSubject$.next(users));
+      .pipe(finalize(() => this.fetchingUsers$.next(false)))
+      .subscribe((users) => {
+        this.fetchingUsers$.next(false);
+        this.usersSubject$.next(users);
+      });
   }
 
   public getUsersFiltered(): Observable<User[]> {

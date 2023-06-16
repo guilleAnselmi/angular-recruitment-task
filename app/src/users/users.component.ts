@@ -1,16 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from 'src/users/models/user.type';
-import { Observable, of } from 'rxjs';
 import { ListComponent } from 'src/reusable/list/list.component';
 import { ListItemComponent } from 'src/reusable/list-item/list-item.component';
 import { UserService } from './services/user.service';
 import { UserItemComponent } from './user-item/user-item.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -20,15 +14,13 @@ import { UserItemComponent } from './user-item/user-item.component';
   styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
   userService = inject(UserService);
-  users$: Observable<User[]> = of([]);
+  users$ = this.userService.getUsersFiltered();
+  isLoading$: Observable<boolean> = this.userService.fetchingUsers$;
   usersTitle = 'Manage Users';
   usersPlaceholder = 'Search Users';
-
-  ngOnInit(): void {
-    this.users$ = this.userService.getUsersFiltered();
-  }
+  noUsersMessage = 'No Users found...';
 
   onSearch(searchTerm: string) {
     this.userService.search(searchTerm);
