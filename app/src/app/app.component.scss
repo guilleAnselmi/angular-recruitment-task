@@ -1,15 +1,22 @@
 .header {
+  height: 40px;
+  width: 100vw;
   display: flex;
-  font-size: 2rem;
-  gap: 10px;
-  a {
-    all: unset;
+  align-items: center;
+  background-color: aliceblue;
+  box-shadow: 0 0 2px 1px #9880f8;
+  &__links {
+    display: flex;
+    padding: 0 10px;
+    gap: 10px;
+  }
+
+  &__link {
+    color: black;
     cursor: pointer;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 5.5px;
-    &.active-route {
-      background-color: lightblue;
+    &--active {
+      color: #9880f8;
+      font-weight: bold;
     }
   }
 }
