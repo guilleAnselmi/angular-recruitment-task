@@ -6,10 +6,12 @@
     [title]="usersTitle"
     [notFoundMessage]="noUsersMessage"
     [items]="users$"
+    [showSelectAll]="true"
+    (selection)="onSelection($event)"
   >
-    <ng-template #listItem let-user>
-      <app-list-item [checked]="user?.checked">
-        <app-user-item [user]="user"></app-user-item>
+    <ng-template #listItem let-item>
+      <app-list-item [checked]="item?.selected">
+        <app-user-item [user]="item.data"></app-user-item>
       </app-list-item>
     </ng-template>
   </app-list>

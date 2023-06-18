@@ -1,7 +1,24 @@
 <div class="header">
-  <a routerLink="users" routerLinkActive="active-route">Users</a>
-  <a routerLink="countries" routerLinkActive="active-route">Countries</a>
-  <a routerLink="payments" routerLinkActive="active-route">Payments</a>
+  <div class="header__links">
+    <a
+      class="header__link"
+      routerLink="users"
+      routerLinkActive="header__link--active"
+      >Users</a
+    >
+    <a
+      class="header__link"
+      routerLink="countries"
+      routerLinkActive="header__link--active"
+      >Countries</a
+    >
+    <a
+      class="header__link"
+      routerLink="payments"
+      routerLinkActive="header__link--active"
+      >Payments</a
+    >
+  </div>
 </div>
 
 <router-outlet></router-outlet>

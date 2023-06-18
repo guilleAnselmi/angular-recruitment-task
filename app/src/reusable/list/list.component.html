@@ -18,11 +18,24 @@
 
     <ng-template #defaultSearchTemplate>
       <app-search
-        *ngIf="filterable"
+        *ngIf="this.listApi.config.filterable"
         class="reusable-list__search"
         [placeholder]="placeholder"
         (inputSearch)="onSearch($event)"
       ></app-search>
+
+      <div
+        *ngIf="showSelectAll && listApi.renderRows.length"
+        class="reusable-list__select-all"
+      >
+        <input
+          id="select-all"
+          (change)="onSelectAll()"
+          [checked]="selectAll"
+          type="checkbox"
+        />
+        <label for="select-all"> Select All </label>
+      </div>
     </ng-template>
   </div>
   <div *ngIf="isLoading" class="reusable-list__loading">
@@ -33,8 +46,17 @@
       <div>Loading...</div>
     </ng-template>
   </div>
-  <div [hidden]="isLoading" class="reusable-list__content">
-    <div class="reussable-list__item" *ngFor="let item of items$ | async">
+  <div
+    (scroll)="onScroll()"
+    [hidden]="isLoading"
+    #content
+    class="reusable-list__content"
+  >
+    <div
+      (click)="onItemClick(item)"
+      class="reusable-list__item"
+      *ngFor="let item of listApi.renderRows"
+    >
       <ng-container
         *ngTemplateOutlet="
           listItem || defaultListItemTemplate;
@@ -43,7 +65,7 @@
       ></ng-container>
     </div>
     <div
-      *ngIf="showNoItemsTemplate && !(items$ | async)?.length"
+      *ngIf="showNoItemsTemplate && !listApi.renderRows.length"
       class="reusable-list__empty"
     >
       <ng-container
@@ -63,13 +85,16 @@
     ></ng-container>
     <ng-template #defaultListFooterTemplate>
       <!-- TODO maybe create a reusable button -->
-      <button class="reusable-list__button">Continue</button>
+      <button (click)="onContinueClick()" class="reusable-list__button">
+        Continue
+      </button>
     </ng-template>
   </div>
 </div>
 
 <ng-template #defaultListItemTemplate let-item>
-  <app-list-item>
-    {{ item[labelValue] }}
+  <app-list-item [checked]="item.selected">
+    {{ item.data['firstName'] }}
+    {{ item.data['lastName'] }}
   </app-list-item>
 </ng-template>

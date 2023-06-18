@@ -7,9 +7,9 @@
     [isLoading]="!!(isLoading$ | async)"
     [items]="countries$ | async"
   >
-    <ng-template #listItem let-country>
-      <app-list-item [checked]="country?.checked">
-        <app-country-item [country]="country"></app-country-item>
+    <ng-template #listItem let-item>
+      <app-list-item [checked]="item.selected">
+        <app-country-item [country]="item.data"></app-country-item>
       </app-list-item>
     </ng-template>
   </app-list>
