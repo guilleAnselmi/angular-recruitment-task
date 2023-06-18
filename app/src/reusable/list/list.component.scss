@@ -20,7 +20,7 @@
     max-height: 400px;
     overflow: auto;
     &::-webkit-scrollbar {
-      display: none;
+      // display: none;
     }
   }
 
@@ -62,5 +62,10 @@
     font-weight: bold;
     color: white;
     text-transform: capitalize;
+  }
+
+  &__select-all {
+    margin-top: 5px;
+    padding: 0 15px;
   }
 }

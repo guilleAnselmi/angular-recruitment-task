@@ -22,10 +22,12 @@ import { PaymentByStatus } from './models/payment.type';
 export class PaymentsComponent {
   paymentService = inject(PaymentsService);
   payments$: Observable<PaymentByStatus[]> =
-    this.paymentService.getPaymentsByStatus();
+  this.paymentService.getPaymentsByStatus();
   isLoading$: Observable<boolean> = this.paymentService.fetchingPayments$;
-
   title = 'Manage Payments';
   placeholder = 'Search Payments';
   notFoundMessage = 'Not Payments found...';
+
+
+  
 }

@@ -7,9 +7,9 @@
     [isLoading]="!!(isLoading$ | async)"
     [items]="payments$ | async"
   >
-    <ng-template #listItem let-payment>
-      <app-list-item [checked]="payment?.checked">
-        <app-payment-item [payment]="payment"></app-payment-item>
+    <ng-template #listItem let-item>
+      <app-list-item [checked]="item.selected">
+        <app-payment-item [payment]="item.data"></app-payment-item>
       </app-list-item>
     </ng-template>
   </app-list>
