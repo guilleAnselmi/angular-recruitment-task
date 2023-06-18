@@ -36,7 +36,7 @@ export class listApi<T> {
       useCustomFilter: false,
       clientSide: true,
       filterable: true,
-      rowsBuffer: 10000,
+      rowsBuffer: 50,
     };
   }
 

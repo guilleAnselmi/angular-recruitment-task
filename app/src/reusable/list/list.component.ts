@@ -110,6 +110,7 @@ export class ListComponent<T> implements OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  //TODO maybe change this for a smoother scroll behavior
   onScroll() {
     const scroll = this.content.nativeElement;
     const scrollHeight = scroll.scrollHeight;
